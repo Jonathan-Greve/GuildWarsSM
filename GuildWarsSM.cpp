@@ -4,12 +4,6 @@
 #include "KeyboardProc.h"
 #include "SafeWndProc.h"
 
-#include "Context/CharContext.h"
-
-#include "Managers/GameThreadMgr.h"
-#include "Managers/MemoryMgr.h"
-#include "Managers/ChatMgr.h"
-
 using namespace boost::interprocess;
 
 void GuildWarsSM::Init()

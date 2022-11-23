@@ -19,6 +19,12 @@
     <Filter Include="Header Files\Thread startup functions">
       <UniqueIdentifier>{bf461c3b-ed63-4815-8aa3-6c238587a2d2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Shared memory classes">
+      <UniqueIdentifier>{dbe2b4c2-7544-470a-88f6-ade15fc85842}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Shared memory classes">
+      <UniqueIdentifier>{26e25a7e-f4fc-48b0-8638-d6db03c2f39a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -45,6 +51,15 @@
     <ClInclude Include="GuildWarsSM.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="SharedMemoryManager.h">
+      <Filter>Header Files\Shared memory classes</Filter>
+    </ClInclude>
+    <ClInclude Include="MapInstance.h">
+      <Filter>Header Files\Shared memory classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Party.h">
+      <Filter>Header Files\Shared memory classes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -67,6 +82,15 @@
     </ClCompile>
     <ClCompile Include="GuildWarsSM.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SharedMemoryManager.cpp">
+      <Filter>Source Files\Shared memory classes</Filter>
+    </ClCompile>
+    <ClCompile Include="MapInstance.cpp">
+      <Filter>Source Files\Shared memory classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Party.cpp">
+      <Filter>Source Files\Shared memory classes</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

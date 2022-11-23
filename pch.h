@@ -15,4 +15,14 @@
 #include <cstdint>
 #include <cstdlib>
 
+// Definitions
+using InstanceId = int;
+
+// GWCA includes
+#include "Context/CharContext.h"
+
+#include "Managers/GameThreadMgr.h"
+#include "Managers/MemoryMgr.h"
+#include "Managers/ChatMgr.h"
+
 #endif //PCH_H
