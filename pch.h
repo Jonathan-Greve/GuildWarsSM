@@ -10,15 +10,20 @@
 // add headers that you want to pre-compile here
 #include "framework.h"
 #include <boost/interprocess/managed_shared_memory.hpp>
-#include "string"
+#include <string>
 #include <format>
+#include <map>
 #include <cstdint>
 #include <cstdlib>
+#include <mutex>
+#include <functional>
 
 // Definitions
+using PartyId = int;
 using InstanceId = int;
 
 // GWCA includes
+#include "Constants/Maps.h"
 #include "Context/CharContext.h"
 
 #include "Managers/GameThreadMgr.h"
