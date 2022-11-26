@@ -6,8 +6,11 @@ class MapInstance
     // Lock this while checking if a mutex exists in _party_mutexes;
     std::mutex mutex_find_mutex;
 
-    std::map<PartyId, Party> _parties;
-    std::map<PartyId, std::mutex> _party_mutexes;
+    // Email addresses of all the connected processes.
+    std::unordered_set<std::string> _connected_client_emails;
+
+    std::unordered_map<PartyId, Party> _parties;
+    std::unordered_map<PartyId, std::mutex> _party_mutexes;
 
 public:
     const InstanceId id = 0;

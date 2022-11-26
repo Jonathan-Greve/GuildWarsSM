@@ -3,16 +3,15 @@
 
 using namespace boost::interprocess;
 
-// Managed the shared memory resources.
+// Manages the shared memory resources.
 class SharedMemoryManager
 {
-    std::unordered_map<InstanceId, managed_shared_memory> _instances;
+    std::pair<InstanceId, managed_shared_memory> m_current_instance;
 
 public:
-    // Check if the instance has been opened/created and stored in _instances.
-    bool IsInstanceAdded(InstanceId id)
+    bool is_connected(InstanceId id)
     {
-        if (! _instances.contains(id))
+        if (m_current_instance.first == id)
         {
             return true;
         }
@@ -20,13 +19,11 @@ public:
         return false;
     }
 
-    // Open or create the shared memory resources and add it to _instances.
-    // Return immediately if already added.
-    const managed_shared_memory& GetOrAddInstance(const MapInstance instance)
+    const managed_shared_memory& connect(const MapInstance instance)
     {
-        if (! _instances.contains(instance.id))
+        if (m_current_instance.first != instance.id)
         {
-            // Init shared memory resource where all instances are stored.
+            // Create of open shared memory resource where all instances are stored.
             auto instance_segment = managed_shared_memory(open_or_create, "sm_instances", 65536);
 
             // Construct MapInstance in shared memory. It it already exists it does nothing.
@@ -36,18 +33,32 @@ public:
             //MapInstance copy(std::move(instance));
 
             // Store in map for future use.
-            _instances[instance.id] = std::move(instance_segment);
+            m_current_instance = {instance.id, std::move(instance_segment)};
         }
-        return _instances[instance.id];
+        return m_current_instance.second;
     }
 
     // Try to remove and delete the shared memory. This checks that this process is the last process
     // with a handle to the shared memory. Returns immediately if id is not in _instances.
-    void TryRemoveInstance(InstanceId id)
+    void disconnect(InstanceId id)
     {
-        if (_instances.contains(id))
+        if (m_current_instance.first == id)
         {
-            throw "Not yet implmented";
+            std::string instance_name = std::format("instance_{}", id);
+            auto instance = m_current_instance.second.find<MapInstance>(instance_name.c_str());
+            if (instance.first != nullptr)
+            {
+                // Remove ourselves from the instance. Delete instance if we were the last client connected.
+                int num_connected_clients = instance.connected_clients().size();
+                if (num_connected_clients == 1)
+                {
+                    // Delete instance
+                }
+                else
+                {
+                    // Disconnect
+                }
+            }
         }
     }
 };
