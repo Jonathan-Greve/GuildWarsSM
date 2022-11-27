@@ -4,13 +4,12 @@
 class MapInstance
 {
     // Lock this while checking if a mutex exists in _party_mutexes;
-    std::mutex mutex_find_mutex;
+    std::mutex m_mutex;
 
     // Email addresses of all the connected processes.
-    std::unordered_set<std::string> _connected_client_emails;
+    std::unordered_set<std::string> m_connected_client_emails;
 
-    std::unordered_map<PartyId, Party> _parties;
-    std::unordered_map<PartyId, std::mutex> _party_mutexes;
+    std::unordered_map<PartyId, Party> m_parties;
 
 public:
     const InstanceId id = 0;
@@ -22,8 +21,8 @@ public:
         : id{map_instance.id}
         , map_id{map_instance.map_id}
     {
-        std::scoped_lock lock(mutex_find_mutex);
-        if (_parties.size() > 0 || _party_mutexes.size() > 0)
+        std::scoped_lock lock(m_mutex);
+        if (m_parties.size() > 0 || m_connected_client_emails.size() > 0)
             throw "MapInstance object only copy-able when no parties are added.";
     };
 
@@ -33,23 +32,30 @@ public:
     {
     }
 
-    void connect(std::string email) { }
-    uint32_t disconnect(std::string email) { return 0; }
+    void connect(const std::string& email)
+    {
+        std::scoped_lock<std::mutex> lock(m_mutex);
+        m_connected_client_emails.insert(email);
+    }
+    uint32_t disconnect(const std::string& email)
+    {
+        std::scoped_lock<std::mutex> lock(m_mutex);
+        m_connected_client_emails.erase(email);
+
+        return m_connected_client_emails.size();
+    }
 
     // Get the party with the given id. If it does not exist, create it.
-    // Secure with mutex.
+    // Returns a reference to the party object. This object can be shared between
+    // multiple clients/processes. The party class protects its own data using mutexes.
     Party& get_or_add_party(PartyId party_id)
     {
-        std::scoped_lock<std::mutex> lock(mutex_find_mutex);
-        if (_party_mutexes.contains(party_id))
+        std::scoped_lock<std::mutex> lock(m_mutex);
+        if (! m_parties.contains(party_id))
         {
-            std::scoped_lock<std::mutex> lock(_party_mutexes[party_id]);
-            if (! _parties.contains(party_id))
-            {
-                _parties[party_id] = Party(party_id);
-            }
+            m_parties[party_id] = Party(party_id);
         }
 
-        return _parties[party_id];
+        return m_parties[party_id];
     }
 };
