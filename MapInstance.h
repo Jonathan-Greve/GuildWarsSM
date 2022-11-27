@@ -33,9 +33,12 @@ public:
     {
     }
 
+    void connect(std::string email) { }
+    uint32_t disconnect(std::string email) { return 0; }
+
     // Get the party with the given id. If it does not exist, create it.
     // Secure with mutex.
-    Party& GetOrAddParty(PartyId party_id)
+    Party& get_or_add_party(PartyId party_id)
     {
         std::scoped_lock<std::mutex> lock(mutex_find_mutex);
         if (_party_mutexes.contains(party_id))
