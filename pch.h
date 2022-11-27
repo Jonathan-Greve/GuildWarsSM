@@ -32,4 +32,7 @@ using InstanceId = int;
 #include "Managers/MemoryMgr.h"
 #include "Managers/ChatMgr.h"
 
+// My header that depend on GWCA
+#include "ChatWriter.h"
+
 #endif //PCH_H

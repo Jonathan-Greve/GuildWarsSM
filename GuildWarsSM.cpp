@@ -23,30 +23,21 @@ void GuildWarsSM::Init()
     // controlled by the GW client.
     GW::GameThread::RegisterGameThreadCallback(&Update_Entry, Update);
 
-    //Remove shared memory on construction and destruction
-
-    managed_shared_memory segment(open_or_create, "GuildWarsSM", 65536);
-    std::string* ptr = segment.construct<std::string>("Email")(email);
-
     keyboard_hook_handle = SetWindowsHookExA(WH_KEYBOARD, &KeyboardProc, nullptr, GetCurrentThreadId());
 
     if (keyboard_hook_handle == NULL)
     {
-        std::wstring init_message =
-          std::format(L"<c=#FFFFFF>: {}</c>", L"Init: Failed setting keyboard hook.");
-        GW::Chat::WriteChat(GW::Chat::CHANNEL_GWCA2, init_message.c_str(), nullptr);
+        ChatWriter::WriteIngameDebugChat("Init: Failed setting keyboard hook.");
         Terminate();
     }
 
-    std::wstring init_message = std::format(L"<c=#FFFFFF>: {}</c>", L"Init: Finished.");
-    GW::Chat::WriteChat(GW::Chat::CHANNEL_GWCA2, init_message.c_str(), nullptr);
+    ChatWriter::WriteIngameDebugChat("Init: Finished.", ChatColor::Green);
 }
 
 // Remove all hooks. Free all resources. Disconnect any connections to external processes.
 void GuildWarsSM::Terminate()
 {
-    std::wstring init_message = std::format(L"<c=#FFFFFF>: {}</c>", L"Terminate called.");
-    GW::Chat::WriteChat(GW::Chat::CHANNEL_GWCA2, init_message.c_str(), nullptr);
+    ChatWriter::WriteIngameDebugChat("Terminate: Called.", ChatColor::DarkRed);
     if (! has_freed_resources)
     {
         GW::GameThread::RemoveGameThreadCallback(&Update_Entry);
