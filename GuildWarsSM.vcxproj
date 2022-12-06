@@ -154,6 +154,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="ChatWriter.h" />
+    <ClInclude Include="ConnectedClients.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="GuildWarsSM.h" />
     <ClInclude Include="KeyboardProc.h" />
@@ -166,6 +167,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ChatWriter.cpp" />
+    <ClCompile Include="ConnectedClients.cpp" />
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="GuildWarsSM.cpp" />
     <ClCompile Include="NewWndProc.cpp" />

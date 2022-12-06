@@ -21,6 +21,7 @@
 #include <functional>
 
 // Other stuff
+#include "ConnectedClients.h"
 #include "SharedMemory.h"
 
 // Definitions
