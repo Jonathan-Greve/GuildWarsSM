@@ -57,17 +57,11 @@
     <ClInclude Include="GuildWarsSM.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SharedMemoryManager.h">
-      <Filter>Header Files\Shared memory classes</Filter>
-    </ClInclude>
-    <ClInclude Include="MapInstance.h">
-      <Filter>Header Files\Shared memory classes</Filter>
-    </ClInclude>
-    <ClInclude Include="Party.h">
-      <Filter>Header Files\Shared memory classes</Filter>
-    </ClInclude>
     <ClInclude Include="ChatWriter.h">
       <Filter>Header Files\Guild Wars interaction</Filter>
+    </ClInclude>
+    <ClInclude Include="SharedMemory.h">
+      <Filter>Header Files\Shared memory classes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -92,17 +86,11 @@
     <ClCompile Include="GuildWarsSM.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SharedMemoryManager.cpp">
-      <Filter>Source Files\Shared memory classes</Filter>
-    </ClCompile>
-    <ClCompile Include="MapInstance.cpp">
-      <Filter>Source Files\Shared memory classes</Filter>
-    </ClCompile>
-    <ClCompile Include="Party.cpp">
-      <Filter>Source Files\Shared memory classes</Filter>
-    </ClCompile>
     <ClCompile Include="ChatWriter.cpp">
       <Filter>Source Files\Guild Wars interaction</Filter>
+    </ClCompile>
+    <ClCompile Include="SharedMemory.cpp">
+      <Filter>Source Files\Shared memory classes</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -21,7 +21,6 @@ inline GW::HookEntry Update_Entry;
 
 class GuildWarsSM
 {
-    GuildWarsSM() = default;
 
 public:
     // Delete copy constructor and operator
@@ -43,5 +42,8 @@ public:
     bool GW_is_closing = false;
     bool has_freed_resources = false;
 
-    std::string client_id;
+private:
+    GuildWarsSM() = default;
+
+    SharedMemory m_shared_memory;
 };

@@ -20,17 +20,34 @@
 #include <mutex>
 #include <functional>
 
+// Other stuff
+#include "SharedMemory.h"
+
 // Definitions
 using PartyId = int;
-using InstanceId = int;
+using InstanceId = uint32_t;
 
 // GWCA includes
 #include "Constants/Maps.h"
+#include "Constants/Constants.h"
+
 #include "Context/CharContext.h"
+#include "Context/PreGameContext.h"
+#include "Context/MapContext.h"
+#include "Context/PartyContext.h"
+#include "Context/WorldContext.h"
+#include "Context/AgentContext.h"
+
+#include "Packets/StoC.h"
+
+#include "GameEntities/Camera.h"
 
 #include "Managers/GameThreadMgr.h"
 #include "Managers/MemoryMgr.h"
 #include "Managers/ChatMgr.h"
+#include "Managers/StoCMgr.h"
+#include "Managers/MapMgr.h"
+#include "Managers/CameraMgr.h"
 
 // My header that depend on GWCA
 #include "ChatWriter.h"
