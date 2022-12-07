@@ -4,6 +4,8 @@
 #include "KeyboardProc.h"
 #include "SafeWndProc.h"
 
+#include "SharedMemoryDataManager.h"
+
 using namespace boost::interprocess;
 
 void GuildWarsSM::Init()
@@ -34,6 +36,7 @@ void GuildWarsSM::Init()
 
     // Create shared memory object;
     m_shared_memory.init(email);
+    m_shared_memory_data_manager.init(m_shared_memory);
 
     ChatWriter::WriteIngameDebugChat("Init: Finished.", ChatColor::Green);
 }
@@ -99,6 +102,7 @@ void GuildWarsSM::Update(GW::HookStatus*)
             if (char_context)
             {
                 InstanceId instance_id = char_context->token1;
+                GuildWarsSM::Instance().m_shared_memory_data_manager.update_client_data();
             }
         }
     }

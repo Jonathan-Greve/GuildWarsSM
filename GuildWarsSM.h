@@ -1,5 +1,6 @@
 #pragma once
 #include "Utilities/Hook.h"
+#include "SharedMemoryDataManager.h"
 
 // Forwards declarations. The header files will be included in the .cpp file
 // This speeds up compilation.
@@ -46,4 +47,5 @@ private:
     GuildWarsSM() = default;
 
     SharedMemory m_shared_memory;
+    SharedMemoryDataManager m_shared_memory_data_manager;
 };

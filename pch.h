@@ -9,8 +9,9 @@
 
 // add headers that you want to pre-compile here
 #include "framework.h"
-#include <boost/interprocess/managed_shared_memory.hpp>
+#include "BoostInterprocess.h"
 #include <string>
+#include <vector>
 #include <format>
 #include <map>
 #include <set>
@@ -20,15 +21,13 @@
 #include <mutex>
 #include <functional>
 
-// Other stuff
-#include "ConnectedClients.h"
-#include "SharedMemory.h"
-
 // Definitions
 using PartyId = int;
 using InstanceId = uint32_t;
 
 // GWCA includes
+#include "GameContainers/List.h"
+#include "GameContainers/GamePos.h"
 #include "Constants/Maps.h"
 #include "Constants/Constants.h"
 
@@ -42,6 +41,7 @@ using InstanceId = uint32_t;
 #include "Packets/StoC.h"
 
 #include "GameEntities/Camera.h"
+#include "GameEntities/Agent.h"
 
 #include "Managers/GameThreadMgr.h"
 #include "Managers/MemoryMgr.h"
@@ -49,8 +49,13 @@ using InstanceId = uint32_t;
 #include "Managers/StoCMgr.h"
 #include "Managers/MapMgr.h"
 #include "Managers/CameraMgr.h"
+#include "Managers/AgentMgr.h"
 
 // My header that depend on GWCA
 #include "ChatWriter.h"
+
+// Other stuff
+#include "ConnectedClients.h"
+#include "SharedMemory.h"
 
 #endif //PCH_H
