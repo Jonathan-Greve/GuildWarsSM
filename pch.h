@@ -9,7 +9,6 @@
 
 // add headers that you want to pre-compile here
 #include "framework.h"
-#include "BoostInterprocess.h"
 #include <string>
 #include <vector>
 #include <format>
@@ -54,8 +53,7 @@ using InstanceId = uint32_t;
 // My header that depend on GWCA
 #include "ChatWriter.h"
 
-// Other stuff
-#include "ConnectedClients.h"
-#include "SharedMemory.h"
+// GW shared memory
+#include "GWSharedMemory.h"
 
 #endif //PCH_H

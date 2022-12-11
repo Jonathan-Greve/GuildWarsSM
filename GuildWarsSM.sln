@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GuildWarsSM", "GuildWarsSM.
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GWCA", "GWCA\vc\GWCA.vcxproj", "{B3359F05-68CF-4E7F-B9D6-D106F6D48A38}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GWSharedMemory", "..\GWSharedMemory\GWSharedMemory.vcxproj", "{E83F39EB-395B-4B62-9E78-D3BCA4697231}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -31,6 +33,14 @@ Global
 		{B3359F05-68CF-4E7F-B9D6-D106F6D48A38}.Release|x64.Build.0 = Release|Win32
 		{B3359F05-68CF-4E7F-B9D6-D106F6D48A38}.Release|x86.ActiveCfg = Release|Win32
 		{B3359F05-68CF-4E7F-B9D6-D106F6D48A38}.Release|x86.Build.0 = Release|Win32
+		{E83F39EB-395B-4B62-9E78-D3BCA4697231}.Debug|x64.ActiveCfg = Debug|x64
+		{E83F39EB-395B-4B62-9E78-D3BCA4697231}.Debug|x64.Build.0 = Debug|x64
+		{E83F39EB-395B-4B62-9E78-D3BCA4697231}.Debug|x86.ActiveCfg = Debug|Win32
+		{E83F39EB-395B-4B62-9E78-D3BCA4697231}.Debug|x86.Build.0 = Debug|Win32
+		{E83F39EB-395B-4B62-9E78-D3BCA4697231}.Release|x64.ActiveCfg = Release|x64
+		{E83F39EB-395B-4B62-9E78-D3BCA4697231}.Release|x64.Build.0 = Release|x64
+		{E83F39EB-395B-4B62-9E78-D3BCA4697231}.Release|x86.ActiveCfg = Release|Win32
+		{E83F39EB-395B-4B62-9E78-D3BCA4697231}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

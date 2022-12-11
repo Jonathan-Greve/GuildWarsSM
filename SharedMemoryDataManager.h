@@ -13,5 +13,5 @@ public:
     int update_client_data();
 
 private:
-    ClientData* m_client_data;
+    std::unique_ptr<ClientData> m_client_data;
 };

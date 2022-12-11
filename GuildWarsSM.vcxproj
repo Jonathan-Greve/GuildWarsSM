@@ -86,7 +86,7 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <LanguageStandard_C>Default</LanguageStandard_C>
-      <AdditionalIncludeDirectories>C:\Users\jonag\source\repos\GuildWarsSM\GWCA\Include;C:\Users\jonag\source\repos\GuildWarsSM\GWCA\Include\GWCA;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\jonag\source\repos\GWSharedMemory;C:\Users\jonag\source\repos\GuildWarsSM\GWCA\Include;C:\Users\jonag\source\repos\GuildWarsSM\GWCA\Include\GWCA;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -107,7 +107,7 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <LanguageStandard_C>Default</LanguageStandard_C>
-      <AdditionalIncludeDirectories>C:\Users\jonag\source\repos\GuildWarsSM\GWCA\Include;C:\Users\jonag\source\repos\GuildWarsSM\GWCA\Include\GWCA;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\jonag\source\repos\GWSharedMemory;C:\Users\jonag\source\repos\GuildWarsSM\GWCA\Include;C:\Users\jonag\source\repos\GuildWarsSM\GWCA\Include\GWCA;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -153,10 +153,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="BoostInterprocess.h" />
     <ClInclude Include="ChatWriter.h" />
-    <ClInclude Include="ClientData.h" />
-    <ClInclude Include="ConnectedClients.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="GuildWarsSM.h" />
     <ClInclude Include="KeyboardProc.h" />
@@ -164,14 +161,11 @@
     <ClInclude Include="pch.h" />
     <ClInclude Include="SafeThreadEntry.h" />
     <ClInclude Include="SafeWndProc.h" />
-    <ClInclude Include="SharedMemory.h" />
     <ClInclude Include="SharedMemoryDataManager.h" />
     <ClInclude Include="ThreadEntry.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ChatWriter.cpp" />
-    <ClCompile Include="ClientData.cpp" />
-    <ClCompile Include="ConnectedClients.cpp" />
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="GuildWarsSM.cpp" />
     <ClCompile Include="NewWndProc.cpp" />
@@ -183,11 +177,13 @@
     </ClCompile>
     <ClCompile Include="SafeThreadEntry.cpp" />
     <ClCompile Include="SafeWndProc.cpp" />
-    <ClCompile Include="SharedMemory.cpp" />
     <ClCompile Include="SharedMemoryDataManager.cpp" />
     <ClCompile Include="ThreadEntry.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\GWSharedMemory\GWSharedMemory.vcxproj">
+      <Project>{e83f39eb-395b-4b62-9e78-d3bca4697231}</Project>
+    </ProjectReference>
     <ProjectReference Include="GWCA\vc\GWCA.vcxproj">
       <Project>{b3359f05-68cf-4e7f-b9d6-d106f6d48a38}</Project>
     </ProjectReference>

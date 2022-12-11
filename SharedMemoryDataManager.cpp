@@ -1,11 +1,10 @@
 #include "pch.h"
 #include "SharedMemoryDataManager.h"
-#include "ClientData.h"
 
 void SharedMemoryDataManager::init(SharedMemory& shared_memory)
 {
-    auto client_data = shared_memory.get().find_or_construct<ClientData>(unique_instance)();
-    m_client_data = client_data;
+    m_client_data =
+      std::unique_ptr<ClientData>(shared_memory.get().find_or_construct<ClientData>(unique_instance)());
 }
 
 int SharedMemoryDataManager::update_client_data()
