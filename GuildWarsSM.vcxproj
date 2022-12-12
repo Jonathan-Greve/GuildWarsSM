@@ -181,9 +181,6 @@
     <ClCompile Include="ThreadEntry.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GWSharedMemory\GWSharedMemory.vcxproj">
-      <Project>{e83f39eb-395b-4b62-9e78-d3bca4697231}</Project>
-    </ProjectReference>
     <ProjectReference Include="GWCA\vc\GWCA.vcxproj">
       <Project>{b3359f05-68cf-4e7f-b9d6-d106f6d48a38}</Project>
     </ProjectReference>

@@ -15,13 +15,17 @@ int SharedMemoryDataManager::update_client_data()
     {
         m_client_data->player.agent_id = character->agent_id;
         m_client_data->player.fps_timer = character->timer;
-        m_client_data->player.layer = character->level;
+        m_client_data->player.ground = character->ground;
+        m_client_data->player.h0060 = character->h0060;
 
         // The game uses a different coordinate system than what I like.
         // I change it do my prefered left-handed coordinate system.
         m_client_data->player.x = character->x;
         m_client_data->player.y = -character->z;
         m_client_data->player.z = character->y;
+
+        m_client_data->player.health = character->hp;
+        m_client_data->player.energy = character->energy;
 
         bytes_written += sizeof(ClientData);
     }
