@@ -28,6 +28,7 @@ void GuildWarsSM::Init()
     {
         ChatWriter::WriteIngameDebugChat("Init: Failed setting keyboard hook.");
         Terminate();
+        return;
     }
 
     // Get client accounts email
@@ -102,7 +103,7 @@ void GuildWarsSM::Update(GW::HookStatus*)
             if (char_context)
             {
                 InstanceId instance_id = char_context->token1;
-                GuildWarsSM::Instance().m_shared_memory_data_manager.update_client_data();
+                //GuildWarsSM::Instance().m_shared_memory_data_manager.update_client_data();
             }
         }
     }
