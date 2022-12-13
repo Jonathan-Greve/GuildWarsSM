@@ -3,8 +3,7 @@
 
 void SharedMemoryDataManager::init(SharedMemory& shared_memory)
 {
-    m_client_data =
-      std::unique_ptr<ClientData>(shared_memory.get().find_or_construct<ClientData>(unique_instance)());
+    m_client_data = shared_memory.get().find_or_construct<ClientData>(unique_instance)();
 }
 
 int SharedMemoryDataManager::update_client_data()
