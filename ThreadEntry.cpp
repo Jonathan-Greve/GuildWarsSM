@@ -41,5 +41,7 @@ DWORD __stdcall ThreadEntry(LPVOID)
 leave:
     GW::Terminate();
 
+    // Seems to fix crash when sleeping here.
+    Sleep(16);
     FreeLibraryAndExitThread(dll_module, EXIT_SUCCESS);
 }
