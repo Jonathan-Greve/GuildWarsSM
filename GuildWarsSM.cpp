@@ -35,9 +35,28 @@ void GuildWarsSM::Init()
     std::wstring email_wchar = GW::GetCharContext()->player_email;
     std::string email{email_wchar.begin(), email_wchar.end()};
 
-    // Create shared memory object;
-    m_shared_memory.init(email);
-    m_shared_memory_data_manager.init(m_shared_memory);
+    if (! m_client_shared_memory.init(email))
+    {
+        Terminate();
+        return;
+    }
+
+    if (! m_connections_shared_memory.init())
+    {
+        Terminate();
+        return;
+    }
+
+    if (! m_connections_shared_memory.get_connected_clients()->connect(
+          m_client_shared_memory, m_connections_shared_memory.get_mutex_handle(),
+          m_connections_shared_memory.get_event_handle()))
+    {
+        ChatWriter::WriteIngameDebugChat("Init: Could not connect!", ChatColor::LightRed);
+        Terminate();
+        return;
+    }
+
+    m_shared_memory_data_manager.init(m_client_shared_memory);
 
     ChatWriter::WriteIngameDebugChat("Init: Finished.", ChatColor::Green);
 }
@@ -45,9 +64,16 @@ void GuildWarsSM::Init()
 // Remove all hooks. Free all resources. Disconnect any connections to external processes.
 void GuildWarsSM::Terminate()
 {
-    ChatWriter::WriteIngameDebugChat("Terminate: Called.", ChatColor::DarkRed);
+    ChatWriter::WriteIngameDebugChat("Terminate: Called.", ChatColor::Blue);
     if (! has_freed_resources)
     {
+        if (! m_connections_shared_memory.get_connected_clients()->disconnect(
+              m_client_shared_memory, m_connections_shared_memory.get_mutex_handle(),
+              m_connections_shared_memory.get_event_handle()))
+        {
+            ChatWriter::WriteIngameDebugChat("Terminate: Could not disconnect!", ChatColor::LightRed);
+        }
+
         GW::GameThread::RemoveGameThreadCallback(&Update_Entry);
 
         UnhookWindowsHookEx(keyboard_hook_handle);
@@ -57,7 +83,7 @@ void GuildWarsSM::Terminate()
 
         // Let ThreadEntry know that it can finish terminating our dll thread.
         has_freed_resources = true;
-        ChatWriter::WriteIngameDebugChat("Terminate: Freed resources.", ChatColor::DarkRed);
+        ChatWriter::WriteIngameDebugChat("Terminate: Freed resources.", ChatColor::Blue);
 
         // If terminate was called because the window is closing (i.e. Alt-f4 or pressed close)
         // Then resend the WM_CLOSE signal that we intercepted earlier in NewWndProc.
@@ -66,7 +92,7 @@ void GuildWarsSM::Terminate()
             SendMessageW(current_GW_window_handle, WM_CLOSE, NULL, NULL);
         }
     }
-    ChatWriter::WriteIngameDebugChat("Terminate: Finished.", ChatColor::DarkRed);
+    ChatWriter::WriteIngameDebugChat("Terminate: Finished.", ChatColor::Blue);
 }
 
 void GuildWarsSM::Update(GW::HookStatus*)

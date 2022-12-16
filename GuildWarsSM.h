@@ -46,6 +46,8 @@ public:
 private:
     GuildWarsSM() = default;
 
-    SharedMemory m_shared_memory;
+    ClientSharedMemory m_client_shared_memory;
+    ConnectionsSharedMemory m_connections_shared_memory;
+
     SharedMemoryDataManager m_shared_memory_data_manager;
 };

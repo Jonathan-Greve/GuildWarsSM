@@ -7,7 +7,7 @@ using namespace boost::interprocess;
 class SharedMemoryDataManager
 {
 public:
-    void init(SharedMemory& shared_memory);
+    void init(ClientSharedMemory& shared_memory);
 
     // Update all data in shared memory and returns the number of bytes written.
     int update_client_data();

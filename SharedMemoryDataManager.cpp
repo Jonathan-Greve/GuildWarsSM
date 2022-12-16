@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "SharedMemoryDataManager.h"
 
-void SharedMemoryDataManager::init(SharedMemory& shared_memory)
+void SharedMemoryDataManager::init(ClientSharedMemory& shared_memory)
 {
     m_client_data = shared_memory.get().find_or_construct<ClientData>(unique_instance)();
 }
