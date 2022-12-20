@@ -4,6 +4,7 @@
 void SharedMemoryDataManager::init(ClientSharedMemory& shared_memory)
 {
     m_client_data = shared_memory.get().find_or_construct<ClientData>(unique_instance)();
+    m_client_data->player.agent_id = 5;
 }
 
 int SharedMemoryDataManager::update_client_data()
@@ -13,7 +14,6 @@ int SharedMemoryDataManager::update_client_data()
     if (character)
     {
         m_client_data->player.agent_id = character->agent_id;
-        m_client_data->player.fps_timer = character->timer;
         m_client_data->player.ground = character->ground;
         m_client_data->player.h0060 = character->h0060;
 
@@ -26,7 +26,22 @@ int SharedMemoryDataManager::update_client_data()
         m_client_data->player.health = character->hp;
         m_client_data->player.energy = character->energy;
 
-        bytes_written += sizeof(ClientData);
+        m_client_data->instance_info.fps_timer = character->timer;
     }
+
+    const auto char_context = GW::GetCharContext();
+    if (char_context)
+    {
+        m_client_data->instance_info.instance_id = char_context->token1;
+    }
+
+    const auto party_context = GW::GetPartyContext();
+    if (party_context)
+    {
+        m_client_data->party.party_id = party_context->player_party->party_id;
+    }
+
+    bytes_written += sizeof(ClientData);
+
     return bytes_written;
 }
